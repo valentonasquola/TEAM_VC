@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameOverUI : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class GameOverUI : MonoBehaviour
     public void OnRestartButtonClicked()
     {
         GameManager.Instance.SetGameState(GameManager.GameState.Gameplay);
-        UIManager.Instance.ShowGameUI();
+        SceneManager.LoadScene("all_objects");
     }
 
     public void OnMainMenuButtonClicked()
