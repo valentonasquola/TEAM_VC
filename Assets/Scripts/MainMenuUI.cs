@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenuUI : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class MainMenuUI : MonoBehaviour
     public void OnStartButtonClicked()
     {
         GameManager.Instance.SetGameState(GameManager.GameState.Gameplay);
-        UIManager.Instance.ShowGameUI();
+        SceneManager.LoadScene("all_objects");
     }
     public void OnExitButtonClicked()
     {

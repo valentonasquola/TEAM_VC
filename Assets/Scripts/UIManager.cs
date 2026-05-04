@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour
     public void ShowGameUI()
     {
         HideAllUI();
-        gameUI.Show();
+        SceneManager.LoadScene("all_objects");
     }
 
     public void ShowGameOverUI()
