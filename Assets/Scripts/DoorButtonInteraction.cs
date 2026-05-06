@@ -1,30 +1,44 @@
 using UnityEngine;
-public class DoorButtonInteraction : MonoBehaviour
-{
-    using UnityEngine;
 
-    public GameObject interactionUI; // Trascina qui il tuo Canvas
-    public Animator doorAnimator;    // Trascina qui l'Animator della porta
+public class InterazionePortaSlider : MonoBehaviour
+{
+    [Header("UI e Messaggi")]
+    public GameObject interactionUI; // Il tuo Canvas "Premi E"
+
+    [Header("Impostazioni Porta")]
+    public MonoBehaviour scriptPorta; // Trascina qui lo script della tua porta
 
     private bool isPlayerNearby = false;
+    private bool isOpen = false;
 
     void Start()
     {
-        // Assicurati che l'interfaccia sia spenta all'inizio
         if (interactionUI != null) interactionUI.SetActive(false);
     }
 
     void Update()
     {
-        // Se il giocatore è vicino e preme il tasto E
         if (isPlayerNearby && Input.GetKeyDown(KeyCode.E))
         {
-            bool isOpen = doorAnimator.GetBool("isOpen");
-            doorAnimator.SetBool("isOpen", !isOpen);
+            TogglePorta();
         }
     }
 
-    // Quando il giocatore entra nell'area del BoxCollider (Trigger)
+    void TogglePorta()
+    {
+        isOpen = !isOpen;
+
+        // Qui cerchiamo di dire allo script della porta cosa fare.
+        // Se il tuo script ha una funzione per aprire/chiudere, la chiamiamo qui.
+        if (isOpen)
+            scriptPorta.SendMessage("ApriPorta", SendMessageOptions.DontRequireReceiver);
+        else
+            scriptPorta.SendMessage("ChiudiPorta", SendMessageOptions.DontRequireReceiver);
+
+        // Se lo script della porta usa solo lo slider, 
+        // dovrai dirmi come si chiama lo script per collegarli meglio.
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -34,7 +48,6 @@ public class DoorButtonInteraction : MonoBehaviour
         }
     }
 
-    // Quando il giocatore esce dall'area
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -44,5 +57,3 @@ public class DoorButtonInteraction : MonoBehaviour
         }
     }
 }
-
-
