@@ -59,9 +59,31 @@ public class ZanonPlayerManager : MonoBehaviour
         currentMoveInput = moveInput;
     }
 
-    public void OnAttack(InputValue value)
+    public void OnOpen(InputValue value)
     {
-       
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 2f);
+
+        foreach (Collider hit in colliders)
+        {
+            // Cerca il componente ApriPorta sull'oggetto colpito o sui suoi genitori
+            ApriPorta porta = hit.GetComponentInParent<ApriPorta>();
+
+            if (porta != null)
+            {
+                // Qui chiama la funzione che apre la porta nel tuo script
+                // Supponendo che la funzione si chiami "Interagisci" o simile
+                porta.Interact();
+
+                // Se vuoi aprire solo la più vicina ed uscire dal ciclo:
+                break;
+            }
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, 2f);
     }
 }
 
