@@ -15793,7 +15793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   giocatore: {fileID: 1288897057}
-  speed: 0.1
+  speed: 0.05
 --- !u!195 &441882459
 NavMeshAgent:
   m_ObjectHideFlags: 0
