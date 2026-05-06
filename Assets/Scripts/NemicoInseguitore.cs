@@ -5,6 +5,7 @@ public class NemicoInseguitore : MonoBehaviour
 {
     public Transform giocatore; 
     private NavMeshAgent agente;
+    [SerializeField] private float speed = 0.1f;
 
     void Start()
     {
